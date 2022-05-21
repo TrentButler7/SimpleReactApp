@@ -1,6 +1,7 @@
 import './css/App.css';
 import Project from './components/Project';
 import Form from './components/Form';
+import Backdrop from './components/Backdrop'
 import { useState } from 'react';
 
 function App() {
@@ -10,11 +11,20 @@ function App() {
     setFormOpen(true);
   }
 
+  function cancelNewProjectHandler(){
+    setFormOpen(false);
+  }
+
+  function submitNewProjectHandler(){
+    setFormOpen(false);
+  }
+
   return (
     <div className='wrapper'>
       <button className='btnNewProject' onClick={newProjectHandler}>Create New Project</button>
       <Project />
-      { formIsOpen && <Form />}
+      { formIsOpen && <Form onFormSubmit={submitNewProjectHandler}/>}
+      { formIsOpen && <Backdrop onClick={cancelNewProjectHandler}/>}
     </div>
   );
 }

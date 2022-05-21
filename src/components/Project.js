@@ -1,20 +1,43 @@
 import '../css/Project.css';
-import {useState} from 'react';
+import {Component} from 'react';
 
-function Project(props){
-    function deleteHandler(){
-
+class Project extends Component{
+    constructor(){ 
+        super(); 
+        this.state= { data: [] } 
     }
 
-    return( 
-        <div>
-            <button className="btnCloseProject" onClick={deleteHandler}>X</button>
-            <h2>{props.projectName}</h2>
-            <p>{props.description}</p>
-            <p>{props.start_date}</p>
-            <p>{props.end_date}</p>
-        </div>
-    );
+    componentDidMount(){
+        fetch('./data.json') 
+        .then(response=>response.json()) 
+        .then(result => { this.setState({data: result}) })
+    }
+
+    render(){
+        const projectsList = this.state.data.map( item => (
+            <div className='projectItem'>
+                <button className="btnDeleteProject">X</button>
+                <div className='titleDescContainer'>
+                    <h2>{item.projectName}</h2>
+                    <p className='desc'>{item.description}</p>
+                </div>
+                <div className='dateContainer'>
+                    <h3>Start Date</h3>
+                    <p>{item.start_date}</p>
+                </div>
+                <div className='dateContainer'>
+                    <h3>Start Date</h3>
+                    <p>{item.end_date}</p>
+                </div>
+            </div>
+        ));
+
+        return( 
+            <div className='projectContainer'>
+                {projectsList}
+            </div>
+        );
+    }
 }
 
 export default Project;

@@ -8,13 +8,34 @@ button, p, h2{
     margin: 10px;
 }
 
-h2{
-    padding: 0px;
-}
-
 button{
     background-color: rgb(212, 42, 42);
     color: white;
     border: none;
+}
+
+.projectItem{
+    display: flex;
+    align-items: center;
+    border: solid black 1px;
+}
+
+.titleDescContainer{
+    border: solid black 1px;
+    flex-basis: 70%;
+}
+
+.titleDescContainer p, .titleDescContainer p{
+    display: block;
+}
+
+h3{
+    margin: 0px;
+}
+
+.dateContainer{
+    text-align: center;
+    border: solid black 1px;
+    flex-grow: 1;
 }
 
