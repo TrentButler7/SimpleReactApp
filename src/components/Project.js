@@ -1,43 +1,42 @@
 import '../css/Project.css';
-import {Component} from 'react';
+import { useEffect } from 'react';
 
-class Project extends Component{
-    constructor(){ 
-        super(); 
-        this.state= { data: [] } 
-    }
-
-    componentDidMount(){
+function Project({onDataChange, data}){
+    useEffect(() => {
         fetch('./data.json') 
         .then(response=>response.json()) 
-        .then(result => { this.setState({data: result}) })
-    }
+        .then(result => { onDataChange(result) })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    render(){
-        const projectsList = this.state.data.map( item => (
-            <div className='projectItem'>
-                <button className="btnDeleteProject">X</button>
-                <div className='titleDescContainer'>
-                    <h2>{item.projectName}</h2>
-                    <p className='desc'>{item.description}</p>
-                </div>
-                <div className='dateContainer'>
-                    <h3>Start Date</h3>
-                    <p>{item.start_date}</p>
-                </div>
-                <div className='dateContainer'>
-                    <h3>Start Date</h3>
-                    <p>{item.end_date}</p>
-                </div>
-            </div>
-        ));
+    const deleteProject = (arr, value) => {
+        onDataChange(arr.filter (item => item !== value));
+    };
 
-        return( 
-            <div className='projectContainer'>
-                {projectsList}
+    const projectsList = data.map( item => (
+        <div className='projectItem' key={item.projectIdentifier}>
+            <button className="btnDeleteProject" onClick={() => deleteProject(data, item)}>X</button>
+            <div className='titleDescContainer'>
+                <h2>{item.projectName}</h2>
+                <p className='desc'>{item.description}</p>
             </div>
-        );
-    }
+            <div className='dateContainer'>
+                <h3>Start Date</h3>
+                <p>{item.start_date}</p>
+            </div>
+            <div className='dateContainer'>
+                <h3>Start Date</h3>
+                <p>{item.end_date}</p>
+            </div>
+        </div>
+    ));
+
+    return( 
+        <div className='projectContainer'>
+            {projectsList}
+        </div>
+    );
 }
+
 
 export default Project;

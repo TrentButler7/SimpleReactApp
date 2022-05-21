@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 function App() {
   const [formIsOpen, setFormOpen] = useState(false);
+  const [data, setData] = useState([]);
 
   function newProjectHandler(){
     setFormOpen(true);
@@ -15,14 +16,16 @@ function App() {
     setFormOpen(false);
   }
 
-  function submitNewProjectHandler(){
+  function submitNewProjectHandler(newProject){
+    alert("here");
     setFormOpen(false);
+    setData(data => [...data, newProject]);
   }
 
   return (
     <div className='wrapper'>
-      <button className='btnNewProject' onClick={newProjectHandler}>Create New Project</button>
-      <Project />
+      <button className='btnNewProject' onClick={newProjectHandler} >Create New Project</button>
+      <Project onDataChange={setData} data={data}/>
       { formIsOpen && <Form onFormSubmit={submitNewProjectHandler}/>}
       { formIsOpen && <Backdrop onClick={cancelNewProjectHandler}/>}
     </div>
