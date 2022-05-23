@@ -4,7 +4,7 @@ import Form from './components/Form';
 import Backdrop from './components/Backdrop';
 import Search from './components/Search';
 import { useState } from 'react';
-import { FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, FormHelperText } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, FormHelperText } from '@mui/material';
 
 function App() {
   const [formIsOpen, setFormOpen] = useState(false);
@@ -42,7 +42,7 @@ function App() {
   return (
     <div className='wrapper'>
       <Search inputHandler={inputHandler}/>
-      <FormControl sx={{midWidth: 80}}>
+      <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
         <InputLabel id='sortByLabel'>Sort By</InputLabel>
         <Select labelId='sortByLabel' value={sortBy} label="Sort By" onChange={handleSortByChange}>
           <MenuItem value={"projectName"}>Project Name</MenuItem>
@@ -50,7 +50,7 @@ function App() {
         </Select>
         <FormHelperText sx={{padding: 0}}>Sort By</FormHelperText>
       </FormControl>
-      <FormControl sx={{midWidth: 80}}>
+      <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
         <InputLabel id='sortSwitchLabel'>Sort Direction</InputLabel>
         <Select labelId='sortSwitchLabel' value={sortDirection} label="Sort By" onChange={handleSortDirectionChange}>
           <MenuItem value={"a"}>Ascending</MenuItem>
@@ -59,7 +59,7 @@ function App() {
         <FormHelperText sx={{padding: 0}}>Sort Direction</FormHelperText>
       </FormControl>
       <button className='btnNewProject' onClick={newProjectHandler} >Create New Project</button>
-      <Project onDataChange={setData} data={data} searchInput={searchInput}/>
+      <Project onDataChange={setData} data={data} searchInput={searchInput} sortBy={sortBy} sortDirection={sortDirection}/>
       { formIsOpen && <Form onFormSubmit={submitNewProjectHandler}/>}
       { formIsOpen && <Backdrop onClick={cancelNewProjectHandler}/>}
     </div>

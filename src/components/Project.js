@@ -1,7 +1,7 @@
 import '../css/Project.css';
 import { useEffect } from 'react';
 
-function Project({onDataChange, data, searchInput}){
+function Project({searchInput, data, onDataChange, sortBy, sortDirection }){
     useEffect(() => {
         fetch('./data.json') 
         .then(response=>response.json()) 
@@ -22,6 +22,18 @@ function Project({onDataChange, data, searchInput}){
         }
     });
 
+    if(sortBy == "projectName"){
+        filteredData.sort((a,b) => b.projectName.localeCompare(a.projectName));
+    }
+    else if(sortBy == "startDate"){
+        filteredData.sort(function(a,b) {
+            return new Date(b.start_date) - new Date(a.start_date);
+        });
+    }
+    if (sortDirection == "a") {
+        filteredData.reverse();
+    }
+
     const projectsList = filteredData.map( item => (
         <div className='projectItem' key={item.projectIdentifier}>
             <button className="btnDeleteProject" onClick={() => deleteProject(data, item)}>X</button>
@@ -34,7 +46,7 @@ function Project({onDataChange, data, searchInput}){
                 <p>{item.start_date}</p>
             </div>
             <div className='dateContainer'>
-                <h3>Start Date</h3>
+                <h3>End Date</h3>
                 <p>{item.end_date}</p>
             </div>
         </div>
