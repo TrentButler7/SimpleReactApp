@@ -1,7 +1,7 @@
 import '../css/Project.css';
 import { useEffect } from 'react';
 
-function Project({onDataChange, data}){
+function Project({onDataChange, data, searchInput}){
     useEffect(() => {
         fetch('./data.json') 
         .then(response=>response.json()) 
@@ -13,7 +13,16 @@ function Project({onDataChange, data}){
         onDataChange(arr.filter (item => item !== value));
     };
 
-    const projectsList = data.map( item => (
+    const filteredData = data.filter( (item) =>{
+        if (searchInput == "") {
+            return item;
+        }
+        else{
+            return item.projectName.toLowerCase().includes(searchInput);
+        }
+    });
+
+    const projectsList = filteredData.map( item => (
         <div className='projectItem' key={item.projectIdentifier}>
             <button className="btnDeleteProject" onClick={() => deleteProject(data, item)}>X</button>
             <div className='titleDescContainer'>
@@ -30,6 +39,8 @@ function Project({onDataChange, data}){
             </div>
         </div>
     ));
+
+    
 
     return( 
         <div className='projectContainer'>
