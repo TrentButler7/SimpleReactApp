@@ -1,4 +1,5 @@
 import TextField from '@mui/material/TextField';
+import '../css/Global.css';
 
 function Search({inputHandler}){
     return(

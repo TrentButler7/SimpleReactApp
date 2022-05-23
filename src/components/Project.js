@@ -1,5 +1,6 @@
 import '../css/Project.css';
 import { useEffect } from 'react';
+import '../css/Global.css';
 
 function Project({searchInput, data, onDataChange, sortBy, sortDirection }){
     useEffect(() => {

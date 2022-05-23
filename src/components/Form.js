@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import '../css/Form.css';
+import '../css/Global.css';
 
 function Form({onFormSubmit}){
     const nameInputRef = useRef();
@@ -25,13 +26,13 @@ function Form({onFormSubmit}){
         <div className="form">
             <h1>Create New Project</h1>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder='Project Name' ref={nameInputRef} />
-                <input type="number" placeholder='Project ID' ref={idInputRef} />
-                <input type="text" placeholder='Description' ref={descInputRef} />
+                <input type="text" placeholder='Project Name' ref={nameInputRef} required />
+                <input type="number" placeholder='Project ID' ref={idInputRef} required />
+                <input type="text" placeholder='Description' ref={descInputRef} required/>
                 <label>Start Date</label>
-                <input type="date" ref={startDateInputRef} />
+                <input type="date" ref={startDateInputRef} required/>
                 <label>End Date</label>
-                <input type="date" ref={endDateInputRef} />
+                <input type="date" ref={endDateInputRef} required/>
                 <input type="submit" value="Submit" />
             </form>
         </div>

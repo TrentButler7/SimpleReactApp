@@ -12,6 +12,7 @@ button{
     background-color: rgb(212, 42, 42);
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 .projectItem{
@@ -21,7 +22,6 @@ button{
 }
 
 .titleDescContainer{
-    border: solid black 1px;
     flex-basis: 70%;
 }
 
@@ -35,7 +35,6 @@ h3{
 
 .dateContainer{
     text-align: center;
-    border: solid black 1px;
     flex-grow: 1;
 }
 

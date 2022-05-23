@@ -1,9 +1,9 @@
-import './css/App.css';
 import Project from './components/Project';
 import Form from './components/Form';
 import Backdrop from './components/Backdrop';
 import Search from './components/Search';
 import { useState } from 'react';
+import './css/Global.css';
 import { FormControl, InputLabel, MenuItem, Select, FormHelperText } from '@mui/material';
 
 function App() {
